@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo list</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+
+
+	<!-- css -->
+	<style type="text/css">
+		#container{
+			background-color: black;
+			width: 360px;
+			margin: 100px  auto;
+			box-shadow: 0 0 1000px rgb(0, 0, 0);
+		}
+		.completed{
+			color: grey;
+			text-decoration: line-through;
+		}
+		h1{
+			background-color: rgb(3, 252, 236);
+			color: white;
+			margin: 0;
+			padding: 10px 20px;
+			text-transform: uppercase;
+			font-size: 24px;
+			text-align: center;
+		}
+		body{
+			background: #B3FFAB;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #12FFF7, #B3FFAB);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #12FFF7, #B3FFAB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		}
+		ul{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			background-color: rgb(201, 154, 237);
+			height: 40px;
+			line-height: 40px;
+			padding-left: 20px;
+		}
+		li:nth-child(2n){
+			background-color: pink;
+		}
+		input{
+			font-size: 18px;
+			width: 100%;
+			padding: 13px 13px 13px 20px;
+			color: rgb(3, 252, 236);
+		}
+		input:focus{
+			background-color: black;
+		}
+		span{
+			background-color: white;
+			height: 40px;
+			margin-left: 0;
+			margin-right: 20px;
+			text-align: center;
+			width: 0px;
+			display: none;
+			color: black;
+			transition: 2.0s linear;
+		}
+		li:hover span{
+			width: 40px;
+			display: inline-block;
+
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container">
+		<h1>To-Do List  <i class="fas fa-plus"></i></h1>
+		<input type="text">
+
+		<ul>
+			<li><span><i class="fas fa-trash"></i></span> Sample item</li>
+			
+
+		</ul>
+		
+	</div>
+
+
+	<script type="text/javascript">
+
+		// <!-- strike the completed job -->
+		$("ul").on("click","li",function(){
+			$(this).toggleClass("completed");				
+		});
+
+		// click on X to remove the li
+		$("ul").on("click","span",function(event){
+			$(this).parent().fadeOut(500,function(){
+				$(this).remove();
+			});
+			event.stopPropagation();
+		});
+
+		$("input[type='text']").keypress(function(){
+			if(event.which===13)
+			{
+				var todotext = $(this).val();
+				$(this).val("");
+				$("ul").append("<li><span><i class='fas fa-trash'></i></span> "+ todotext + "</li>");
+			}
+		});
+
+		$(" .fa-plus").on("click",function(){
+			$("input[type='text']").fadeToggle();
+		});
+
+
+
+
+	</script>
+
+</body>
+</html>
